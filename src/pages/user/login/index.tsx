@@ -1,5 +1,5 @@
 import Footer from '@/components/Footer';
-import { login } from '@/services/ant-design-pro/api';
+// import { login } from '@/services/ant-design-pro/api';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { LoginForm, ProFormText } from '@ant-design/pro-components';
 import { Alert, message, Tabs } from 'antd';
@@ -50,7 +50,19 @@ const Login: React.FC = () => {
     try {
       // 登录
       values.password = new MD5().update(values.password).digest('hex');
-      const res = await login({ ...values });
+      // const res = await login({ ...values });
+      const res = {
+        code: 0,
+        msg: 'success',
+        data: {
+          user: {
+            name: 'xiaowei',
+            userid: '12345',
+            phone: '17319332997',
+            user_type: 2,
+          },
+        },
+      };
       if (res.code === 0) {
         // @ts-ignore
         const defaultLoginSuccessMessage = intl.formatMessage({
