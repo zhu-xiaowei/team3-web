@@ -9,9 +9,9 @@ export default defineConfig({
     babelOptions: {},
   },
   proxy: {
-    '/api': {
+    '/default': {
       // target: 'http://127.0.0.1:8080',
-      target: 'https://acpkp3ic6j.ap-northeast-1.awsapprunner.com',
+      target: 'https://3edskgidf2.execute-api.us-east-1.amazonaws.com',
       changeOrigin: true,
       pathRewrite: { '^/server': '' },
     },

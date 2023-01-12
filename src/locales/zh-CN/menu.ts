@@ -1,5 +1,5 @@
 export default {
-  'menu.welcome': '视频上传',
+  'menu.upload': '视频上传',
   'menu.home': '首页',
   'menu.admin': '视频列表',
   'menu.admin.sub-page': '二级管理页',

@@ -12,9 +12,9 @@ const Settings: LayoutSettings & {
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: '视频字幕',
+  title: '不卷教育',
   pwa: false,
-  logo: 'https://carlwe-bucket.s3.ap-northeast-1.amazonaws.com/aws.jpg',
+  logo: 'https://d2zpi2271oxop7.cloudfront.net/image/bujuan_logo.png',
   iconfontUrl: '',
 };
 

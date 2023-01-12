@@ -4,25 +4,48 @@ import { Space } from 'antd';
 import React from 'react';
 import { videoList } from '@/services/ant-design-pro/api';
 import styles from './index.less';
-import { localStore } from '@/utils/utils';
+// import { localStore } from '@/utils/utils';
+// import VideoJS from './VideoJS'
+import ReactPlayer from 'react-player';
 
 const VideoList: React.FC = () => {
+  // const srt_url= "https://d2zpi2271oxop7.cloudfront.net/appflow.vtt"
+  const srt_url = 'https://d2zpi2271oxop7.cloudfront.net/app_flow.vtt';
+  // const srt_url= "https://raw.githubusercontent.com/benwfreed/test-subtitles/master/mmvo72166981784.vtt"
   // 请求table数据
   const getVideoList = async () => {
-    const { userid } = JSON.parse(localStore.getItem('userInfo') || '{}');
-    const params = {
-      userId: userid,
-    };
+    // const { userid } = JSON.parse(localStore.getItem('userInfo') || '{}');
+    const params = {};
     try {
       const data = await videoList(params);
+
+      // const data =  {
+      //   code: 200,
+      //   msg: 'success',
+      //   data: {
+      //     videoList: [{
+      //       title: "视频1",
+      //       thumbnail: "https://d2zpi2271oxop7.cloudfront.net/image/image.png",
+      //       video_url: "https://d2zpi2271oxop7.cloudfront.net/video/appflow.mp4",
+      //       srt_url: "https://raw.githubusercontent.com/benwfreed/test-subtitles/master/mmvo72166981784.vtt"
+      //     }, {
+      //       title: "视频2",
+      //       thumbnail: "https://d2zpi2271oxop7.cloudfront.net/image/image.png",
+      //       video_url: "https://d2zpi2271oxop7.cloudfront.net/video/appflow.mp4",
+      //       srt_url: "https://d2zpi2271oxop7.cloudfront.net/appflow.vtt"
+      //     }
+      //     ]
+      //   },
+      // };
       // 请求成功
-      if (data && data.code === 0) {
+      console.log('---' + JSON.stringify(data));
+      if (data && data.code === 200) {
         return {
           // @ts-ignore
-          data: data.data.videoList,
+          data: data.videoList,
           success: true,
           // @ts-ignore
-          total: data.data.videoList.length,
+          total: data.videoList.length,
         };
       }
     } catch (err) {
@@ -31,48 +54,35 @@ const VideoList: React.FC = () => {
     return {};
   };
 
+  // @ts-ignore
   const columns: ProColumns<API.Video>[] = [
     {
       dataIndex: 'thumbnail',
-      title: '视频封面',
+      title: '',
       render: (dom, record) => (
         <Space>
-          <img src={record.thumbnail} className={styles.imgStyle} />
+          <div>
+            <h3>{record.title}</h3>
+            <ReactPlayer
+              url={record.video_url}
+              controls={true}
+              config={{
+                file: {
+                  attributes: {
+                    crossOrigin: 'anonymous',
+                  },
+                  tracks: [
+                    { kind: 'subtitles', src: srt_url, srcLang: 'en', label: 'en', default: true },
+                  ],
+                },
+              }}
+              className={styles.imgStyle}
+            />
+            {/*<VideoJS />*/}
+            {/*<video src={record.video_url} className={styles.imgStyle} controls/>*/}
+          </div>
         </Space>
       ),
-    },
-    {
-      dataIndex: 'title',
-      title: '视频标题',
-    },
-    {
-      dataIndex: 'upload_time',
-      width: 300,
-      title: '上传时间',
-    },
-    {
-      dataIndex: 'like_num',
-      width: 150,
-      title: '点赞',
-    },
-    {
-      dataIndex: 'unlike_num',
-      width: 150,
-      title: '踩',
-    },
-    {
-      dataIndex: 'hls_state',
-      width: 150,
-      title: '转码状态',
-      render: (_, record) => {
-        if (record.hls_state === 1) {
-          return '转码成功';
-        } else if (record.hls_state === 2) {
-          return '转码失败';
-        } else {
-          return '转码中';
-        }
-      },
     },
   ];
 
@@ -80,6 +90,7 @@ const VideoList: React.FC = () => {
     <PageContainer>
       <ProTable<API.Video>
         columns={columns}
+        // @ts-ignore
         request={getVideoList}
         rowKey="outUserNo"
         pagination={{

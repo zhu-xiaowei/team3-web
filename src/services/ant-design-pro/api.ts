@@ -16,10 +16,11 @@ export async function login(body: API.LoginParams, options?: { [key: string]: an
 
 /** 登录接口 POST /api/login/account */
 export async function addVideo(body: API.AddVideo, options?: { [key: string]: any }) {
-  return request<API.DataResult>('/api/addVideo', {
+  return request<API.DataResult>('/default/SALaunchFinalPresentationLambda', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'x-api-key': 'hPvBKfdjW54d1AJBwPCzh694ICAWolS75fnQDxNc',
     },
     data: body,
     ...(options || {}),
@@ -27,9 +28,13 @@ export async function addVideo(body: API.AddVideo, options?: { [key: string]: an
 }
 
 /** 获取当前的用户 GET /api/videoList */
-export async function videoList(params: { userId?: number }, options?: { [key: string]: any }) {
-  return request<API.DataResult>('/api/videoList', {
+export async function videoList(params: {}, options?: { [key: string]: any }) {
+  return request<API.DataResult>('/default/SALaunchFinalPresentationLambda', {
     method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': 'hPvBKfdjW54d1AJBwPCzh694ICAWolS75fnQDxNc',
+    },
     params: {
       ...params,
     },

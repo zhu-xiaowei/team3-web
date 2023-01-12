@@ -4,13 +4,13 @@ import React, { useState } from 'react';
 import UploadPicComponent from '@/components/Upload/UploadPicComponent';
 import UploadVideoComponent from '@/components/Upload/UploadVideoComponent';
 import { addVideo } from '@/services/ant-design-pro/api';
-import { history } from '@@/core/history';
-import { localStore } from '@/utils/utils';
+// import { history } from '@@/core/history';
+// import { localStore } from '@/utils/utils';
 
 const Index: React.FC = () => {
   const [picPath, setPicPath] = useState('');
   const [s3Url, setS3Url] = useState('');
-  const [sourceUrl, setSourceUrl] = useState('');
+  // const [sourceUrl, setSourceUrl] = useState('');
 
   const handleSubmit = async (value: any) => {
     if (!value.name) {
@@ -25,19 +25,18 @@ const Index: React.FC = () => {
       message.error(`请上传视频`);
       return;
     }
-    const { userid } = JSON.parse(localStore.getItem('userInfo') || '{}');
+    // const { userid } = JSON.parse(localStore.getItem('userInfo') || '{}');
     const param = {
       title: value.name,
       thumbnail: picPath,
-      s3_url: s3Url,
-      source_url: sourceUrl,
-      create_user_id: userid,
+      video_url: s3Url,
     };
     const res = await addVideo({ ...param });
-    if (res.code === 0) {
+    console.log('---' + JSON.stringify(res));
+    if (res.code === 200) {
       message.success(`上传成功`);
       //前往视频列表查看
-      history.push('/admin/video/list');
+      // history.push('/video/list');
     } else {
       message.error(`${res.msg}`);
     }
@@ -68,7 +67,8 @@ const Index: React.FC = () => {
           <UploadVideoComponent
             onResult={(s3_url, source_url) => {
               setS3Url(s3_url);
-              setSourceUrl(source_url);
+              console.log(source_url);
+              // setSourceUrl(source_url);
             }}
           />
           <br />

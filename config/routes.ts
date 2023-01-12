@@ -1,42 +1,21 @@
 ﻿export default [
   {
-    path: '/user',
-    layout: false,
-    routes: [
-      {
-        name: 'login',
-        path: '/user/login',
-        component: './user/login',
-      },
-      {
-        component: './404',
-      },
-    ],
-  },
-  {
-    path: '/welcome',
-    name: 'welcome',
-    icon: 'upload',
-    access: 'canAdmin',
-    component: './video/upload',
-  },
-  {
-    path: '/admin/video/list',
+    path: '/video/list',
     name: 'admin',
     icon: 'table',
     access: 'canAdmin',
     component: './video/list',
   },
   {
-    name: 'list.table-list',
-    icon: 'User',
-    path: '/admin/user/list',
+    path: '/video/upload',
+    name: 'upload',
+    icon: 'upload',
     access: 'canAdmin',
-    component: './user/list',
+    component: './video/upload',
   },
   {
     path: '/',
-    redirect: '/welcome',
+    redirect: '/video/list',
   },
   {
     component: './404',

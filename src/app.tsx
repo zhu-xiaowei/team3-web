@@ -3,11 +3,11 @@ import RightContent from '@/components/RightContent';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { PageLoading, SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from 'umi';
-import { history } from 'umi';
+// import { history } from 'umi';
 import defaultSettings from '../config/defaultSettings';
-import { localStore } from '@/utils/utils';
+// import { localStore } from '@/utils/utils';
 
-const loginPath = '/welcome';
+// const loginPath = '/user/login';
 
 /** 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
@@ -23,31 +23,30 @@ export async function getInitialState(): Promise<{
   loading?: boolean;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
-  const fetchUserInfo = async () => {
-    try {
-      const user = JSON.parse(localStore.getItem('userInfo') || '{}');
-      if (user.userid) {
-        return JSON.parse(localStore.getItem('userInfo') || '{}');
-      } else {
-        history.push(loginPath);
-      }
-    } catch (error) {
-      history.push(loginPath);
-    }
-    return undefined;
-  };
+  // const fetchUserInfo = async () => {
+  //   try {
+  //     const user = JSON.parse(localStore.getItem('userInfo') || '{}');
+  //     if (user.userid) {
+  //       return JSON.parse(localStore.getItem('userInfo') || '{}');
+  //     } else {
+  //       history.push(loginPath);
+  //     }
+  //   } catch (error) {
+  //     history.push(loginPath);
+  //   }
+  //   return undefined;
+  // };
   // 如果不是登录页面，执行
-  if (history.location.pathname !== loginPath) {
-    // eslint-disable-next-line @typescript-eslint/no-shadow
-    const currentUser = await fetchUserInfo();
-    return {
-      fetchUserInfo,
-      currentUser,
-      settings: defaultSettings,
-    };
-  }
+  // if (history.location.pathname !== loginPath) {
+  //   // eslint-disable-next-line @typescript-eslint/no-shadow
+  //   const currentUser = await fetchUserInfo();
+  //   return {
+  //     fetchUserInfo,
+  //     currentUser,
+  //     settings: defaultSettings,
+  //   };
+  // }
   return {
-    fetchUserInfo,
     settings: defaultSettings,
   };
 }
@@ -62,11 +61,11 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     },
     footerRender: () => <Footer />,
     onPageChange: () => {
-      const { location } = history;
+      // const { location } = history;
       // 如果没有登录，重定向到 login
-      if (!initialState?.currentUser && location.pathname !== loginPath) {
-        history.push(loginPath);
-      }
+      // if (!initialState?.currentUser && location.pathname !== loginPath) {
+      //   history.push(loginPath);
+      // }
     },
     menuHeaderRender: undefined,
     // 自定义 403 页面

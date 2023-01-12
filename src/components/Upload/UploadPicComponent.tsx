@@ -53,7 +53,7 @@ export default class UploadPicComponent extends React.Component {
       // @ts-ignore
       <Upload {...props} customRequest={this.upload} maxCount={1}>
         <div>视频封面</div>
-        <Button icon={<UploadOutlined />}>单击上传</Button>
+        <Button icon={<UploadOutlined />}>点击上传</Button>
       </Upload>
     );
   }

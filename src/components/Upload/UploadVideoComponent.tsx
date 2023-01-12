@@ -36,7 +36,8 @@ export default class UploadVideoComponent extends React.Component {
   private upload = (param: IParam) => {
     // @ts-ignore
     const { onResult } = this.props;
-    const photoKey = encodeURIComponent('video') + '/' + param.file.name;
+    // const photoKey = encodeURIComponent('video') + '/' + param.file.name;
+    const photoKey = param.file.name;
     Upload$(this.bucket, photoKey, param).subscribe(
       () => {
         onResult(
@@ -55,7 +56,7 @@ export default class UploadVideoComponent extends React.Component {
       <Upload {...props} customRequest={this.upload} maxCount={1}>
         <br />
         <div>上传视频</div>
-        <Button icon={<UploadOutlined />}>单击上传</Button>
+        <Button icon={<UploadOutlined />}>点击上传</Button>
       </Upload>
     );
   }

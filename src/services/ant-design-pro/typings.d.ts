@@ -40,8 +40,8 @@ declare namespace API {
   type AddVideo = {
     title: string;
     thumbnail: string;
-    source_url: string;
-    s3_url: string;
+    video_url: string;
+    // s3_url: string;
   };
 
   type AddUser = {
@@ -54,11 +54,11 @@ declare namespace API {
   type Video = {
     title: string;
     thumbnail: string;
-    source_url: string;
+    video_url: string;
     like_num: number;
     unlike_num: number;
     hls_state: number;
-    upload_time: string;
+    srt_url: string;
   };
 
   type DataResult = {
