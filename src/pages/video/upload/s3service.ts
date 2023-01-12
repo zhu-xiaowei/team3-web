@@ -9,7 +9,7 @@ export const createS3 = () => {
   AWS.config.update({
     region: 'ap-northeast-1',
     credentials: new AWS.CognitoIdentityCredentials({
-      IdentityPoolId: 'ap-northeast-1:d14de07d-7c6d-4d40-ad30-774a04dbeab7',
+      IdentityPoolId: 'ap-northeast-1:6aed41e3-f023-4c4f-b2f1-01f112129cde',
     }),
   });
 
@@ -36,8 +36,8 @@ export const Upload$ = (bucket: string, key: string, body: IUpload): Subject<Put
       Body: body.file, // 是文件类型
       Bucket: bucket, // 对应S3上的bucket
       Key: key, // 需要上传到的路径
-      GrantReadACP: 'uri=http://acs.amazonaws.com/groups/global/AllUsers',
-      GrantRead: 'uri=http://acs.amazonaws.com/groups/global/AllUsers',
+      // GrantReadACP: 'uri=http://acs.amazonaws.com/groups/global/AllUsers',
+      // GrantRead: 'uri=http://acs.amazonaws.com/groups/global/AllUsers',
     },
     (err: AWSError, resp: PutObjectOutput) => {
       if (err) {

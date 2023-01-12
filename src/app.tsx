@@ -7,7 +7,7 @@ import { history } from 'umi';
 import defaultSettings from '../config/defaultSettings';
 import { localStore } from '@/utils/utils';
 
-const loginPath = '/user/login';
+const loginPath = '/welcome';
 
 /** 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {

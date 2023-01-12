@@ -27,7 +27,7 @@ const props: UploadProps = {
 };
 
 export default class UploadVideoComponent extends React.Component {
-  public bucket: string = 'my-video-stack-source71e471f1-jcr9upd05io8'; // 您要上传到的bucket名字
+  public bucket: string = 'team3-res'; // 您要上传到的bucket名字
 
   static propTypes = {
     onResult: PropTypes.func,
@@ -36,13 +36,12 @@ export default class UploadVideoComponent extends React.Component {
   private upload = (param: IParam) => {
     // @ts-ignore
     const { onResult } = this.props;
-    const photoKey = encodeURIComponent('assets01') + '/' + param.file.name;
+    const photoKey = encodeURIComponent('video') + '/' + param.file.name;
     Upload$(this.bucket, photoKey, param).subscribe(
       () => {
         onResult(
-          's3://my-video-stack-source71e471f1-jcr9upd05io8/' + photoKey,
-          'https://my-video-stack-source71e471f1-jcr9upd05io8.s3.ap-northeast-1.amazonaws.com/' +
-            photoKey,
+          'https://d2zpi2271oxop7.cloudfront.net/' + photoKey,
+          'https://d2zpi2271oxop7.cloudfront.net/' + photoKey,
         );
         console.log('成功');
       },
